@@ -8,6 +8,39 @@ if (!isset($_SESSION["classexist"])) {
 	$WerkBeheer = $_SESSION["classexist"];
 }
 
+//add listener\\
+if (isset($_POST["toevogen"])) {
+	if(isset($km))
+	{
+		$km = "";
+	} else {
+		$km = filter_var($km, FILTER_SANITIZE_STRING);
+	}
+	if(!isset($locatie)) {
+		$locatie = "";
+	} else {
+		$locatie = filter_var($locatie, FILTER_SANITIZE_STRING);
+	}
+	if(!isset($Aankomst)) {
+		$Aankomst = "";
+	} else {
+		$Aankomst = filter_var($Aankomst, FILTER_SANITIZE_STRING);
+	}
+	if(!isset($Vertrek)) {
+		$Vertrek = "";
+	} else {
+		$Vertrek = filter_var($Vertrek, FILTER_SANITIZE_STRING);
+	}
+	if(!isset($No)) {
+		$No = "";
+	} else {
+		$No = filter_var($No, FILTER_SANITIZE_STRING);
+	}
+	$_POST[""];
+	// add($km, $locatie, $Aankomst, $Vertrek, $No);
+}
+
+//funccties\\
 function laden() {
 	
 	if (!isset($_SESSION["classexist"])) {
@@ -16,10 +49,7 @@ function laden() {
 	} else {
 		$WerkBeheer = $_SESSION["classexist"];
 	}
-	if ($_SESSION["firstsearch"] == true )
-	{
-		$WerkBeheer->load();
-	}
+
 	if (isset($_POST["verstuurdatum"])){
 		if(isset($_POST["dag"])) {
 			$WerkBeheer->setDag($_POST["dag"]);
@@ -36,12 +66,17 @@ function laden() {
 			$_SESSION['firstsearch'] = true;
 		}
 	}
+	if ($_SESSION["firstsearch"])
+	{
+		echo "deze";
+		$WerkBeheer->load();
+	}
 	
 	print_r($_SESSION);
 	
 
 }
-function add() {
-
+function add($km, $locatie, $Aankomst, $Vertrek, $No) {
+	$WerkBeheer->add($km, $locatie, $Aankomst, $Vertrek, $No);
 }
 ?>

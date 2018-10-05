@@ -54,6 +54,11 @@ class WerkBeheer {
 		}
 		}
 	}
+	public function add($km, $locatie, $Aankomst, $Vertrek, $No) {
+		include 'conn.php';
+		
+		
+	}
 }
 
 ?>
