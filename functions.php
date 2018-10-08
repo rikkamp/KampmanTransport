@@ -8,36 +8,71 @@ if (!isset($_SESSION["classexist"])) {
 	$WerkBeheer = $_SESSION["classexist"];
 }
 
-//add listener\\
-if (isset($_POST["toevogen"])) {
-	if(!isset($km))
+
+//edit listener\\
+if (isset($_POST['edit'])) {
+	if(!isset($_POST["km"]))
 	{
 		$km = "";
 	} else {
-		$km = filter_var($km, FILTER_SANITIZE_STRING);
+		$km = filter_var($_POST["km"], FILTER_SANITIZE_STRING);
 	}
-	if(!isset($locatie)) {
+	if(!isset($_POST["loc"])) {
 		$locatie = "";
 	} else {
-		$locatie = filter_var($locatie, FILTER_SANITIZE_STRING);
+		$locatie = filter_var($_POST["loc"], FILTER_SANITIZE_STRING);
 	}
-	if(!isset($Aankomst)) {
+	if(!isset($_POST["aan"])) {
 		$Aankomst = "";
 	} else {
-		$Aankomst = filter_var($Aankomst, FILTER_SANITIZE_STRING);
+		$Aankomst = filter_var($_POST["aan"], FILTER_SANITIZE_STRING);
 	}
-	if(!isset($Vertrek)) {
+	if(!isset($_POST["ver"])) {
 		$Vertrek = "";
 	} else {
-		$Vertrek = filter_var($Vertrek, FILTER_SANITIZE_STRING);
+		$Vertrek = filter_var($_POST["ver"], FILTER_SANITIZE_STRING);
 	}
-	if(!isset($No)) {
+	if(!isset($_POST["no"])) {
 		$No = "";
 	} else {
-		$No = filter_var($No, FILTER_SANITIZE_STRING);
+		$No = filter_var($_POST["no"], FILTER_SANITIZE_STRING);
 	}
-	// add($km, $locatie, $Aankomst, $Vertrek, $No);
+	unset($_SESSION['firstsearch']);
 }
+
+
+//add listener\\
+if (isset($_POST["toevogen"])) {
+	if(!isset($_POST["Km"]))
+	{
+		$km = "";
+	} else {
+		$km = filter_var($_POST["Km"], FILTER_SANITIZE_STRING);
+	}
+	if(!isset($_POST["Locatie"])) {
+		$locatie = "";
+	} else {
+		$locatie = filter_var($_POST["Locatie"], FILTER_SANITIZE_STRING);
+	}
+	if(!isset($_POST["Aankomst"])) {
+		$Aankomst = "";
+	} else {
+		$Aankomst = filter_var($_POST["Aankomst"], FILTER_SANITIZE_STRING);
+	}
+	if(!isset($_POST["Vertrek"])) {
+		$Vertrek = "";
+	} else {
+		$Vertrek = filter_var($_POST["Vertrek"], FILTER_SANITIZE_STRING);
+	}
+	if(!isset($_POST["No"])) {
+		$No = "";
+	} else {
+		$No = filter_var($_POST["No"], FILTER_SANITIZE_STRING);
+	}
+	unset($_SESSION['firstsearch']);
+	add($km, $locatie, $Aankomst, $Vertrek, $No);
+}
+
 
 //funccties\\
 function laden() {
@@ -71,6 +106,17 @@ function laden() {
 		}
 }
 function add($km, $locatie, $Aankomst, $Vertrek, $No) {
-	$WerkBeheer->add($km, $locatie, $Aankomst, $Vertrek, $No);
+	if (!isset($_SESSION["classexist"])) {
+		$WerkBeheer = new WerkBeheer;
+		$_SESSION["classexist"] = $WerkBeheer;
+	} else {
+		$WerkBeheer = $_SESSION["classexist"];
+	}
+	$result = $WerkBeheer->add($km, $locatie, $Aankomst, $Vertrek, $No);
+	if ($result === true) {
+		echo "gelukt";
+	} else {
+		echo "mislukt";
+	}
 }
 ?>

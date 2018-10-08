@@ -6,7 +6,7 @@ class WerkBeheer {
 	private $jaar;
 
 	public function setDag($dag) {
-		$newdag =filter_var($dag, FILTER_SANITIZE_STRING);
+		$newdag = filter_var($dag, FILTER_SANITIZE_STRING);
 		$this->dag = $newdag;
 	}
 	public function getDag() {
@@ -58,8 +58,29 @@ class WerkBeheer {
 	}
 	public function add($km, $locatie, $Aankomst, $Vertrek, $No) {
 		include 'conn.php';
-		
-		
+		$dag = $this->dag;
+		$jaar = $this->jaar;
+		$week = $this->week;
+		// echo $km ." km<br>". $locatie . ": loc<br>". $Aankomst ." : aankom<br>". $Vertrek ." : ver<br>". $No . ": no<br>". $jaar .": jaar<br>". $week .": week<br>" . $dag;
+		$sql = "INSERT INTO gegevens (ID, Jaar, Week, Dag, km, Locatie, Aankomst, Vertrek, No)
+		Values
+		(NULL, :Jaar, :Week, :Dag, :Km, :Locatie, :Aankomst, :vertrek, :Num)";
+		$stmt = $conn->prepare($sql);
+		$stmt->bindParam(':Jaar', $jaar, \PDO::PARAM_INT);
+		$stmt->bindParam(':Week', $week, \PDO::PARAM_INT);
+		$stmt->bindParam(':Dag', $dag, \PDO::PARAM_STR);
+		$stmt->bindParam(':Km', $km, \PDO::PARAM_STR);
+		$stmt->bindParam(':Locatie', $locatie, \PDO::PARAM_STR);
+		$stmt->bindParam(':Aankomst', $Aankomst, \PDO::PARAM_STR);
+		$stmt->bindParam(':vertrek', $Vertrek, \PDO::PARAM_STR);
+		$stmt->bindParam(':Num', $No, \PDO::PARAM_STR);
+		if($stmt->execute()) {
+			$answer = true;
+		} else {
+			// echo $sql;
+			$answer = $conn->errorInfo();
+		}
+		return $answer;
 	}
 }
 
