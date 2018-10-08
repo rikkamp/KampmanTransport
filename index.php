@@ -15,6 +15,7 @@ include 'functions.php';
 		<!-- Datum tabel -->
 		<div class="test">
 			<form method="post" name="WeekDag" action="">
+		
 			<table>
 				<tr>
 					<th>jaar:<input class="jaar" type="number" name="jaar" value=""></th>
@@ -37,6 +38,8 @@ include 'functions.php';
 		</div>
 		<!-- info tabel -->
 		<div class="">
+		<form method="post" name="Nieuw" action="">
+			<form method="post" name="Edit"action="">
 			<table>
 				<tr>
 					<th>#</th>
@@ -48,7 +51,7 @@ include 'functions.php';
 				</tr>
 				<!-- hier komt de data -->
 				<? laden(); ?>
-				<form method="post" name="Nieuw" action="">
+			
 					<tr>
 						<td></td>
 						<td><input type="text" name="Km"></td>
@@ -56,10 +59,12 @@ include 'functions.php';
 						<td><input type="text" name="Aankomst"></td>
 						<td><input type="text" name="Vertrek"></td>
 						<td><input type="text" name="No"></td>
-						<td> <input type="submit" name="toevogen" value="Nieuwe regel toevoegen" /></td>
+						<td><input type="submit" name="toevogen" value="Nieuwe regel toevoegen" /></td>
 					</tr>
-				</form>
+				
 			</table>
+			</form>
+			</form>
 		</div>
 	</main>
 	<footer>

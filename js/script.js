@@ -95,3 +95,22 @@ const yearValue = () => {
 const getYearValue = () => {
 	document.querySelector(".jaar").value = sessionStorage.getItem('jaarvalue');
 }
+const pasaan = () => {
+	let id = event.target.value;
+	let km = document.querySelector(".km"+id).dataset.km;
+	let loc = document.querySelector(".loc"+id).dataset.loc;
+	let aan = document.querySelector(".aan"+id).dataset.aan;
+	let ver = document.querySelector(".ver"+id).dataset.ver;
+	let no = document.querySelector(".no"+id).dataset.no;
+	console.log();
+	document.querySelector(".row"+id).innerHTML = `
+	
+		<td class='id${id}'>${id}</td>
+		<td data-km='${km}' class='km${id}'><input type="text" name="km" value="${km}"></td>
+		<td data-loc='${loc}' class='loc${id}'><input type="text" name="loc" value="${loc}"> </td>
+		<td data-aan='${aan}'class='aan${id}'><input type="text" name="aan" value="${aan}"> </td>
+		<td data-ver='${ver}'class='ver${id}'><input type="text" name="ver" value="${ver}"> </td>
+		<td data-no='${no}'class='no${id}'><input type="text" name="ver" value="${no}"</td>
+		<td><input type="submit" name="verstuurdatum" value="haal week op" /></td>
+	`
+}

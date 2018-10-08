@@ -10,7 +10,7 @@ if (!isset($_SESSION["classexist"])) {
 
 //add listener\\
 if (isset($_POST["toevogen"])) {
-	if(isset($km))
+	if(!isset($km))
 	{
 		$km = "";
 	} else {
@@ -36,7 +36,6 @@ if (isset($_POST["toevogen"])) {
 	} else {
 		$No = filter_var($No, FILTER_SANITIZE_STRING);
 	}
-	$_POST[""];
 	// add($km, $locatie, $Aankomst, $Vertrek, $No);
 }
 
@@ -60,21 +59,16 @@ function laden() {
 		if(isset($_POST["jaar"])) {
 			$WerkBeheer->setJaar($_POST["jaar"]);
 		}
-		if (!isset($_SESSION["firstsearch"]))
+		if (isset($_SESSION["firstsearch"]))
 		{
 			$WerkBeheer->load();
 			$_SESSION['firstsearch'] = true;
 		}
 	}
-	if ($_SESSION["firstsearch"])
-	{
-		echo "deze";
-		$WerkBeheer->load();
-	}
-	
-	print_r($_SESSION);
-	
-
+		if (!isset($_SESSION["firstsearch"]))
+		{
+			$WerkBeheer->load();
+		}
 }
 function add($km, $locatie, $Aankomst, $Vertrek, $No) {
 	$WerkBeheer->add($km, $locatie, $Aankomst, $Vertrek, $No);

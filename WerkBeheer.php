@@ -38,20 +38,22 @@ class WerkBeheer {
 		$stmt->bindParam(':dag', $dag, \PDO::PARAM_STR);
 		$stmt->bindParam(':jaar', $jaar, \PDO::PARAM_INT);
 		if($stmt->execute()) {
+			$answer = "";
 			$result = $stmt->fetchAll(\PDO::FETCH_ASSOC);
 		foreach($result as $row) {
-			echo "
-			<tr>
-				<td>{$row['ID']}</td>
-				<td class='id{$row["ID"]}'>{$row['Km']} </td>
-				<td class='id{$row["ID"]}'>{$row['Locatie']} </td>
-				<td class='id{$row["ID"]}'>{$row['Aankomst']} </td>
-				<td class='id{$row["ID"]}'>{$row['vertrek']} </td>
-				<td class='id{$row["ID"]}'>{$row['No']} </td>
-				<td><button class='aanpas' value='{$row["ID"]}'>aanpas</button></td>
+			$answer .= "
+			<tr class='row{$row['ID']}'>
+				<td class='id{$row["ID"]}'>{$row["ID"]}</td>
+				<td data-km='{$row['Km']}' class='km{$row["ID"]}'>{$row['Km']}</td>
+				<td data-loc='{$row['Locatie']}'class='loc{$row["ID"]}'>{$row['Locatie']} </td>
+				<td data-aan='{$row['Aankomst']}'class='aan{$row["ID"]}'>{$row['Aankomst']} </td>
+				<td data-ver='{$row['vertrek']}'class='ver{$row["ID"]}'>{$row['vertrek']} </td>
+				<td data-no='{$row['No']}'class='no{$row["ID"]}'>{$row['No']} </td>
+				<td><button class='aanpas' onclick=pasaan() value='{$row["ID"]}'>aanpas</button></td>
 			</tr>
 			";
 		}
+		echo $answer;
 		}
 	}
 	public function add($km, $locatie, $Aankomst, $Vertrek, $No) {
