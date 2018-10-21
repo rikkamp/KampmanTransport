@@ -1,6 +1,3 @@
-<?php
-include 'functions.php';
-?>
 <html lang="nl">
 <head>
 	<meta charset="UTF-8">
@@ -50,6 +47,9 @@ include 'functions.php';
 					<th>No</th>
 				</tr>
 				<!-- hier komt de data -->
+				<?php
+				include 'functions.php';
+				?>
 				<? laden(); ?>
 			
 					<tr>
@@ -62,9 +62,11 @@ include 'functions.php';
 						<td><input type="submit" name="toevogen" value="Nieuwe regel toevoegen" /></td>
 					</tr>
 				
+				
 			</table>
 			</form>
 			</form>
+			<button class="pdf">Genereer PDF</button>
 		</div>
 	</main>
 	<footer>
@@ -72,3 +74,4 @@ include 'functions.php';
 	<script src="js/script.js"></script>
 </body>
 </html>
+
